@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Karzina.Common.SmtpEmailHelper</name>
+    </assembly>
+    <members>
+        <member name="T:Karzina.Common.SmtpEmailHelper">
+            <summary>
+            Creates an email error message sender that can throttle error emails so that the recipient email inbox is not flooded in the case of recurring errors.
+            </summary>
+            <remarks>
+            The rationale is that once a call for help has been made, the helpers have been notified and are either coming or not.
+            Hence, there is no need to keep calling. The maximum message rate is determined as one message per thresholdPeriodSeconds.
+            An occurrence of more calls to send() than allowed by the maximum message rate will cause the helper to not send the email but to simply log it instead.
+            The next request to send() will be honoured only if sending the message would not exceed the specified message rate.
+            </remarks>
+        </member>
+        <member name="F:Karzina.Common.SmtpEmailHelper.log">
+            <summary>
+            Provides a logging facility for this class.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.SmtpEmailHelper.#ctor(System.String,System.String)">
+            <summary>
+            Create an email helper using values from the config file, but only if the "to" string contains a value.
+            </summary>
+            <param name="to"></param>
+            <param name="subject"></param>
+        </member>
+        <member name="M:Karzina.Common.SmtpEmailHelper.send(System.String)">
+            <summary>
+            Request to send a message via email. It may be swallowed if a previous email was sent within the threshold limit.
+            </summary>
+            <param name="message">The body of the email message you wish to send.</param>
+        </member>
+        <member name="P:Karzina.Common.SmtpEmailHelper.smtpClient">
+            <summary>
+            The internal SmtpClient object
+            </summary>
+            <remarks>
+            Allows user to set the following on a helper = new SmtpEmailHelper(...)
+                helper.smtpClient.UseDefaultCredentials = false;
+                NetworkCredential credential = new NetworkCredential("domain_user_name", "domain_user_password)", "domain_name");
+            or  NetworkCredential credential = new NetworkCredential("domain_user_name", "domain_user_password");
+                helper.smtpClient.Credentials = credential;
+            </remarks>
+        </member>
+        <member name="P:Karzina.Common.SmtpEmailHelper.thresholdPeriodSeconds">
+            <summary>
+            Email message threshold period (seconds)
+            </summary>
+        </member>
+    </members>
+</doc>

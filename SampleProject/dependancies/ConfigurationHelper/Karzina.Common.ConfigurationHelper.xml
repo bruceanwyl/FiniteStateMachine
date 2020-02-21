@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Karzina.Common.ConfigurationHelper</name>
+    </assembly>
+    <members>
+        <member name="T:Karzina.Common.ConfigurationHelper">
+            <summary>
+            Provides access to applicationSettings, userSettings, appSettings and custom configuration sections contained within an external configuration file.
+            </summary>
+        </member>
+        <member name="F:Karzina.Common.ConfigurationHelper.CONFIGURATION_FILENAME_KEY">
+            <summary>
+            The key of the appSetting value in the application.exe.config that points to the external configuration file.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.ConfigurationHelper.#cctor">
+            <summary>
+            Provides access to applicationSettings, userSettings and appSettings stored in an external configuration file.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.ConfigurationHelper.GetSection(System.String)">
+            <summary>
+            Returns the specified System.Configuration.ConfigurationSection object.
+            </summary>
+            <param name="sectionName">The path to the section to be returned.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Karzina.Common.ConfigurationHelper.ConfigurationFileName">
+            <summary>
+            The name of the configuration file pointed to from the standard {application name}
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ConfigurationHelper.appSettings">
+            <summary>
+            Provides access to appSettings values in an external configuration file.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ConfigurationHelper.applicationSettings">
+            <summary>
+            Provides access to applicationSettings values in an external configuration file.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ConfigurationHelper.userSettings">
+            <summary>
+            Provides access to userSettings values in an external configuration file.
+            </summary>
+        </member>
+        <member name="T:Karzina.Common.GenericConfigurationElementCollection`1">
+            <summary>
+            The GenericConfigurationElementCollection&lt;t&gt; provides a simple generic implementation of ConfigurationElementCollection.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <remarks></remarks>
+        </member>
+        <member name="M:Karzina.Common.GenericConfigurationElementCollection`1.CreateNewElement">
+            <summary>
+            Create a new ConfigurationElement
+            </summary>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:Karzina.Common.GenericConfigurationElementCollection`1.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Get the value of the key for a particular ConfigurationElement
+            </summary>
+            <param name="element"></param>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="P:Karzina.Common.GenericConfigurationElementCollection`1.Item(System.Int32)">
+            <summary>
+            Gets an indexed object from the internal collection.
+            </summary>
+            <param name="idx"></param>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:Karzina.Common.XmlSectionHandler">
+            <summary>
+            A generic Configuration Section Handler.
+            </summary>
+            <remarks>
+            Relies on an additional "type" attribute on the section xml node.
+            </remarks>
+        </member>
+        <member name="M:Karzina.Common.XmlSectionHandler.#ctor">
+            <summary>
+            A generic Configuration Section Handler.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.XmlSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
+            <summary>
+            Implementation of System.Configuration.IConfigurationSectionHandler.Create() 
+            </summary>
+            <param name="parent"></param>
+            <param name="configContext"></param>
+            <param name="section"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

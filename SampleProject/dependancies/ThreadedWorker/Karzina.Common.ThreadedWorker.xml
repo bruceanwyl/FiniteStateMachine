@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Karzina.Common.ThreadedWorker</name>
+    </assembly>
+    <members>
+        <member name="T:Karzina.Common.IThreadedWorker">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.IThreadedWorker.DoWork">
+            <summary>
+            Placeholder for the task performed by this worker's thread.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.IThreadedWorker.StartWorker">
+            <summary>
+            Start the worker thread. Runs the method DoWork()
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.IThreadedWorker.StopAndWait">
+            <summary>
+            Request the worker thread to stop and then join it until it does.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.IThreadedWorker.RequestStop">
+            <summary>
+            Request the worker thread to stop, returning the thread object for later join by caller. Useful for services handling multiple worker threads.
+            </summary>
+            <returns>A reference to the worker thread.</returns>
+        </member>
+        <member name="E:Karzina.Common.IThreadedWorker.ThreadedWorkerTerminated">
+            <summary>
+            This event is raised if the ThreadedWorker object throws an exception.
+            </summary>
+            <remarks>
+            It is intended that the windows service listens for this event.
+            </remarks>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.ErrorEmailFrom">
+            <summary>
+            "from" email address used when sending email messages warning of error conditions. 
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.ErrorEmailTo">
+            <summary>
+            "to" email address used when sending email messages warning of error conditions. 
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.InputFolder">
+            <summary>
+            Input folder. Expected to be the root folder in case of multiple inputs.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.InputFileMask">
+            <summary>
+            Input file mask. Limits the input candidate files for processing using naming conventions. eg "*.edi"
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.OutputFolder">
+            <summary>
+            Output folder. Expected to be the root folder in case of multiple outputs.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.PollIntervalSeconds">
+            <summary>
+            Number of seconds that this task will sleep between work cycles.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.RetryIntervalSeconds">
+            <summary>
+            Number of seconds that this task will sleep between error recovery retries.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.RetriesBetweenWarnings">
+            <summary>
+            Number of times that this task will attempt error recovery between failure warnings.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.TaskName">
+            <summary>
+            Identifies this task in logging messages.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.IThreadedWorker.ConnectionString">
+            <summary>
+            Connection string for database access
+            </summary>
+        </member>
+        <member name="T:Karzina.Common.ThreadedWorker">
+            <summary>
+            Provides the core of a worker object that runs in a thread.
+            The implementation of the interface allows for dynamic loading of worker dlls at run time.
+            </summary>
+        </member>
+        <member name="F:Karzina.Common.ThreadedWorker.workerTerminated">
+            <summary>
+            Indicates if the worker thread has raised the ThreadedWorkerTerminated event.
+            </summary>
+        </member>
+        <member name="F:Karzina.Common.ThreadedWorker.worker">
+            <summary>
+            The thread in which the task performed by this worker will run.
+            </summary>
+        </member>
+        <member name="F:Karzina.Common.ThreadedWorker.locker">
+            <summary>
+            Mutual exclusion object to make various actions thread safe.
+            </summary>
+        </member>
+        <member name="F:Karzina.Common.ThreadedWorker.stopRequested">
+            <summary>
+            Implementer of DoWork() can set this value to ask the thread to stop itself,
+            or test it to see if a stop has been requested.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.ThreadedWorker.DoWork">
+            <summary>
+            Placeholder for the task performed by this worker's thread.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.ThreadedWorker.StartWorker">
+            <summary>
+            Start the worker thread. Runs the method DoWork()
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.ThreadedWorker.StopAndWait">
+            <summary>
+            Request the worker thread to stop and then join it until it does.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.ThreadedWorker.RequestStop">
+            <summary>
+            Request the worker thread to stop, returning the thread object for later join by caller. Useful for services handling multiple worker threads.
+            </summary>
+            <returns>A reference to the worker thread.</returns>
+        </member>
+        <member name="M:Karzina.Common.ThreadedWorker.OnWorkerTerminated(System.Exception)">
+            <summary>
+            Allows the implementer of DoWork to raise an event to tell the Service manager that 
+            the thread is stopping by action of the thread code itself. eg an Exception was raised.
+            </summary>
+            <param name="ex">The exception that caused the worker thread to terminate.</param>
+        </member>
+        <member name="E:Karzina.Common.ThreadedWorker.ThreadedWorkerTerminated">
+            <summary>
+            This event is raised if the ThreadedWorker object throws an exception.
+            </summary>
+            <remarks>
+            It is intended that the windows service listens for this event.
+            </remarks>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.ErrorEmailFrom">
+            <summary>
+            "from" email address used when sending email messages warning of error conditions. 
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.ErrorEmailTo">
+            <summary>
+            "to" email address used when sending email messages warning of error conditions. 
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.InputFolder">
+            <summary>
+            Input folder. Expected to be the root folder in case of multiple inputs.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.InputFileMask">
+            <summary>
+            Input file mask. Limits the input candidate files for processing using naming conventions. eg "*.edi"
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.OutputFolder">
+            <summary>
+            Output folder. Expected to be the root folder in case of multiple outputs.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.PollIntervalSeconds">
+            <summary>
+            Number of seconds that this task will sleep between work cycles.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.RetryIntervalSeconds">
+            <summary>
+            Number of seconds that this task will sleep between error recovery retries.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.RetriesBetweenWarnings">
+            <summary>
+            Number of times that this task will attempt error recovery between failure warnings.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.TaskName">
+            <summary>
+            Identifies this task in logging messages.
+            </summary>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorker.ConnectionString">
+            <summary>
+            Connection string for database access
+            </summary>
+        </member>
+        <member name="T:Karzina.Common.ThreadedWorkerTerminatedEventArgs">
+            <summary>
+            Data container for the ThreadedWorkerTerminated event.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.ThreadedWorkerTerminatedEventArgs.#ctor(System.Exception)">
+            <summary>
+            Create a ThreadedWorkerTerminatedEventArgs object initialised with the worker exception.
+            </summary>
+            <param name="workerException">The exception that caused the worker to terminate.</param>
+        </member>
+        <member name="P:Karzina.Common.ThreadedWorkerTerminatedEventArgs.workerException">
+            <summary>
+            The exception that caused the worker to terminate.
+            </summary>
+        </member>
+        <member name="T:Karzina.Common.ThreadedWorkerTerminatedEventHandler">
+            <summary>
+            Delegate to handle a ThreadedWorkerTerminated event.
+            </summary>
+            <param name="sender">The object that raises the event.</param>
+            <param name="args">The data that goes with the event.</param>
+        </member>
+    </members>
+</doc>

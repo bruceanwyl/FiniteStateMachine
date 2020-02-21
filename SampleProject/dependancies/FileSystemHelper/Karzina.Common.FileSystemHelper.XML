@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Karzina.Common.FileSystemHelper</name>
+    </assembly>
+    <members>
+        <member name="T:Karzina.Common.FileAvailableEventHandler">
+            <summary>
+            Event is fired after the list of available file names is empty and a new file becomes available.
+            </summary>
+        </member>
+        <member name="T:Karzina.Common.FileSystemHelper">
+            <summary>
+            Present a list of filtered filenames in a folder. 
+            Filenames are presented one at a time until the list is exhausted.
+            After the list is exhausted, if a new file becomes available, a FileAvailable event is sent to all registered listeners.
+            </summary>
+        </member>
+        <member name="F:Karzina.Common.FileSystemHelper.log">
+            <summary>
+            Write a message to the error logs.
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.FileSystemHelper.#ctor(System.String)">
+            <summary>
+            Watch the specified path and manage a list of all available filenames.
+            </summary>
+            <param name="path">The filesystem path to watch.</param>
+        </member>
+        <member name="M:Karzina.Common.FileSystemHelper.#ctor(System.String,System.Collections.Generic.IComparer{System.IO.FileInfo})">
+            <summary>
+            Watch the specified path and manage a list of all available filenames.
+            </summary>
+            <param name="path">The filesystem path to watch.</param>
+            <param name="comparer">Object used to compare two FileInfo objects. Used if you want a sorted file list.</param>
+        </member>
+        <member name="M:Karzina.Common.FileSystemHelper.#ctor(System.String,System.String)">
+            <summary>
+            Watch the specified path and manage a list of all available filenames matching the filter paramater.
+            </summary>
+            <param name="path">The filesystem path to watch.</param>
+            <param name="filter">filename filter eg: "*.txt." to watch only filenames ending with ".txt"</param>
+        </member>
+        <member name="M:Karzina.Common.FileSystemHelper.#ctor(System.String,System.String,System.Collections.Generic.IComparer{System.IO.FileInfo})">
+            <summary>
+            Watch the specified path and manage a list of all available filenames matching the filter paramater.
+            </summary>
+            <param name="path">The filesystem path to watch.</param>
+            <param name="filter">filename filter eg: "*.txt." to watch only filenames ending with ".txt"</param>
+            <param name="comparer">Object used to compare two FileInfo objects. Used if you want a sorted file list.</param>
+        </member>
+        <member name="M:Karzina.Common.FileSystemHelper.GetNextFilename">
+            <summary>
+            Get the name of the next available file in the folder being watched.
+            </summary>
+            <returns>A file name OR a zero length string if none are available.</returns>
+        </member>
+        <member name="M:Karzina.Common.FileSystemHelper.RefreshFileList">
+            <summary>
+            Rebuilds the list of files to be presented by this object
+            </summary>
+        </member>
+        <member name="M:Karzina.Common.FileSystemHelper.GetTempFilename(System.String,System.String,System.String)">
+            <summary>
+            Creates a uniquely named temporary file in the folder of your choice and returns the full path name of that file. The filename can have an optional prefix and extension.
+            </summary>
+            <param name="folder">Name of the folder in which to create the file</param>
+            <param name="prefix">Filename prefix eg: tmp_</param>
+            <param name="extension">Filename extension eg: .tmp</param>
+            <returns>The name of the file created</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="E:Karzina.Common.FileSystemHelper.FileAvailable">
+            <summary>
+            Event is raised when, after the list of available filenames is exhausted, a new file becomes available.
+            </summary>
+        </member>
+    </members>
+</doc>
